@@ -1,25 +1,25 @@
 class ZzDrop < Formula
   desc "CLI and local agent for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.0.1-pre.3"
+  version "0.0.1-pre.4"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-aarch64-apple-darwin.tar.xz"
-      sha256 "5b2657db3525163dace233624e7368f20c206d35323d2979bd90101e93804f36"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-aarch64-apple-darwin.tar.xz"
+      sha256 "a4d26be5c963bf8d4240d3210df0b67bc8f81270d0a5227653f689b0860a0e88"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-x86_64-apple-darwin.tar.xz"
-      sha256 "b621b52002c5530656c41ee771e71c44f0b5549f486fe2ed584bb73d13598f5d"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-x86_64-apple-darwin.tar.xz"
+      sha256 "d5e1f2fde69e445ef5ed9e544a33e53be54aa36bceb489a4d5910ff39407f2a7"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "9875700d03ac1c8d5123d170c7d81c7fa299f79d74eced0624ce2392ccee7511"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "6a25e23ba5eab270c9ada1c1fd8a97c4bf2f41af03a0aa695b685178383d52fd"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "632bfc40e8a2bf91ed24ad3e21bd9daab6c11d1b0ac2509d73dd6050291029dc"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "592d4aebc30b4ca0dddae3ad60f6bce024890688ee3fa6744fcf2892505231bf"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
