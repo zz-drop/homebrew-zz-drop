@@ -1,25 +1,25 @@
 class ZzDropTui < Formula
   desc "Ratatui-based setup and configuration UI for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.0.1-pre.3"
+  version "0.0.1-pre.4"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-tui-aarch64-apple-darwin.tar.xz"
-      sha256 "c62e6bb4d30b389e3039da7b2ae8ff8da026ad7dc8378b065e0a71a40c179554"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-tui-aarch64-apple-darwin.tar.xz"
+      sha256 "ec32aaaa77ad072f3f75386f48603aff59d663842626ff550227dbeab813d045"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-tui-x86_64-apple-darwin.tar.xz"
-      sha256 "50935855d7ae83c69a6d6dedfabeae83ab92fbed9fcf899646522d26a8ba342d"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-tui-x86_64-apple-darwin.tar.xz"
+      sha256 "b8490953055c3b4de0f33c9dd50ff53dbfb844e9e69251ba181a3efb6d106848"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-tui-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "baabfcc00570687c2a540aef0d3862675739266e86d024c7216da300246f71eb"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-tui-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "25defe5e9679df90a9e7de31a6ee40c268b1f504c1f7c9af8a53325906af704d"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.3/zz-drop-tui-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "bfb29e1d25eb828b872859bcfef25aed8bad6a4fdf5db160d0a25d041acf788a"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.4/zz-drop-tui-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "0264633b60d7c7ab01bac97a2c91049b67e7f4fe9b3089efdfec6ca0a32f1660"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
