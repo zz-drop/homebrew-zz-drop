@@ -62,4 +62,8 @@ class ZzDrop < Formula
     # sample files.
     pkgshare.install(*leftover_contents) unless leftover_contents.empty?
   end
+  def post_install
+    zz = HOMEBREW_PREFIX/"bin/zz"
+    zz.make_symlink opt_bin/"zz-drop" unless zz.exist?
+  end
 end
