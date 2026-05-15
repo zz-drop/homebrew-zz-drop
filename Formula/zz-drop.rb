@@ -58,6 +58,8 @@ class ZzDrop < Formula
 
     install_binary_aliases!
 
+    generate_completions_from_executable(bin/"zz-drop", "--completions", shells: [:bash, :zsh, :fish])
+
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
     leftover_contents = Dir["*"] - doc_files
@@ -65,5 +67,25 @@ class ZzDrop < Formula
     # Install any leftover files in pkgshare; these are probably config or
     # sample files.
     pkgshare.install(*leftover_contents) unless leftover_contents.empty?
+  end
+
+  def post_install
+    zz = HOMEBREW_PREFIX/"bin/zz"
+    zz.make_symlink opt_bin/"zz-drop" if !zz.symlink? && !zz.exist?
+  end
+
+  def uninstall_postflight
+    zz = HOMEBREW_PREFIX/"bin/zz"
+    zz.unlink if zz.symlink? && zz.readlink == opt_bin/"zz-drop"
+  end
+
+  def caveats
+    <<~EOS
+      A `zz` shorthand was linked to `zz-drop` if no `zz` already
+      existed in your PATH. Shell completions for bash, zsh and
+      fish were installed automatically.
+      If you later install another command named `zz`, remove
+      #{HOMEBREW_PREFIX}/bin/zz and reinstall.
+    EOS
   end
 end
