@@ -1,38 +1,70 @@
 class ZzDrop < Formula
   desc "CLI and local agent for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.0.1-pre.8"
+  version "0.0.1-pre.9"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.8/zz-drop-aarch64-apple-darwin.tar.xz"
-      sha256 "41cf6194b6b948cc573b33ba2a64e63b3ef70f9af7263c5c31ba092b814f2626"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-aarch64-apple-darwin.tar.xz"
+      sha256 "af2cd5731c50e92e1435e040ab59b1543f7b5ae1403b70e9c0aa0f6d500cb668"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.8/zz-drop-x86_64-apple-darwin.tar.xz"
-      sha256 "5b90a28dd0941a8f9b79ef0984fac9e5fbc62ff80339050892aa1c6ef6d07b78"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-x86_64-apple-darwin.tar.xz"
+      sha256 "d663286b77aaf947f68c0f27d659ae122a9edf74533cab8e57195a0db66dd68b"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.8/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "61cce12009c14130ace23836c9d3bab48267577f4e9f41c5adc4cfa878d79432"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "ca2953fadce93c0107be3f0be138a0c127a2771cb38903af93f6f2ca961410ca"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.8/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "4f8fe91b4e0c5275215ed904f43ab5ba99280f46dfecebe2f25fda5feab63b23"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "ac982766a3250af96bff458e206c9c7e9eb265fdc5abed87bd6174bc774f9e98"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin":               {},
-    "aarch64-unknown-linux-gnu":          {},
-    "aarch64-unknown-linux-musl-dynamic": {},
-    "aarch64-unknown-linux-musl-static":  {},
-    "x86_64-apple-darwin":                {},
-    "x86_64-unknown-linux-gnu":           {},
-    "x86_64-unknown-linux-musl-dynamic":  {},
-    "x86_64-unknown-linux-musl-static":   {},
+    "aarch64-apple-darwin":               {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "aarch64-unknown-linux-gnu":          {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "aarch64-unknown-linux-musl-dynamic": {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "aarch64-unknown-linux-musl-static":  {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "x86_64-apple-darwin":                {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "x86_64-unknown-linux-gnu":           {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "x86_64-unknown-linux-musl-dynamic":  {
+      "zz-drop": [
+        "zz",
+      ],
+    },
+    "x86_64-unknown-linux-musl-static":   {
+      "zz-drop": [
+        "zz",
+      ],
+    },
   }.freeze
 
   def target_triple
@@ -57,9 +89,6 @@ class ZzDrop < Formula
     bin.install "zz-drop", "zz-tui" if OS.linux? && Hardware::CPU.intel?
 
     install_binary_aliases!
-
-    generate_completions_from_executable(bin/"zz-drop", "--completions", shells: [:bash, :zsh, :fish])
-    bin.install_symlink bin/"zz-drop" => "zz"
 
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
