@@ -1,34 +1,38 @@
 class ZzDrop < Formula
   desc "CLI and local agent for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.0.1-pre.5"
+  version "0.0.1-pre.6"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.5/zz-drop-aarch64-apple-darwin.tar.xz"
-      sha256 "0e5747d5bb5a1c915615fb2a7ed3a57c38946d4df610a4e29ebee6fe32b3240f"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-aarch64-apple-darwin.tar.xz"
+      sha256 "57346604ac983597fcec37fb390e5a234e81befd3064f40f6717db60c95bc1af"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.5/zz-drop-x86_64-apple-darwin.tar.xz"
-      sha256 "06f463977db309a265595280ea60ae1d2e4ff92312647f5c600bdac8e0abc890"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-x86_64-apple-darwin.tar.xz"
+      sha256 "c5cfb196388feb47a1e91c963e667bb746e0a9e3489c44c8eff4e77490091e1d"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.5/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "a38dfdf1f733a557b62639ad44fe6648cfa35319643c8c6f3d639fd657bca1a9"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "e08bd5f42877a17859408a7760262684f55f5e7c616fca24791d476929a7de37"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.5/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "85530ed05411726ad264d134e37be543aeecd2eeeb96eef26880f2865b8ef62c"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "7b37a7b7f4b48c5f293932bc4555c9f704ebe507f97f6a8129c9c72bf44f2b3d"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin":      {},
-    "aarch64-unknown-linux-gnu": {},
-    "x86_64-apple-darwin":       {},
-    "x86_64-unknown-linux-gnu":  {},
+    "aarch64-apple-darwin":               {},
+    "aarch64-unknown-linux-gnu":          {},
+    "aarch64-unknown-linux-musl-dynamic": {},
+    "aarch64-unknown-linux-musl-static":  {},
+    "x86_64-apple-darwin":                {},
+    "x86_64-unknown-linux-gnu":           {},
+    "x86_64-unknown-linux-musl-dynamic":  {},
+    "x86_64-unknown-linux-musl-static":   {},
   }.freeze
 
   def target_triple
@@ -61,9 +65,5 @@ class ZzDrop < Formula
     # Install any leftover files in pkgshare; these are probably config or
     # sample files.
     pkgshare.install(*leftover_contents) unless leftover_contents.empty?
-  end
-  def post_install
-    zz = HOMEBREW_PREFIX/"bin/zz"
-    zz.make_symlink opt_bin/"zz-drop" unless zz.exist?
   end
 end
