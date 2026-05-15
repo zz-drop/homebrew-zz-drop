@@ -58,6 +58,9 @@ class ZzDrop < Formula
 
     install_binary_aliases!
 
+    generate_completions_from_executable(bin/"zz-drop", "--completions", shells: [:bash, :zsh, :fish])
+    bin.install_symlink bin/"zz-drop" => "zz"
+
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
     leftover_contents = Dir["*"] - doc_files
