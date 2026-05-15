@@ -1,25 +1,25 @@
 class ZzDrop < Formula
   desc "CLI and local agent for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.0.1-pre.9"
+  version "0.0.1-pre.10"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-aarch64-apple-darwin.tar.xz"
-      sha256 "af2cd5731c50e92e1435e040ab59b1543f7b5ae1403b70e9c0aa0f6d500cb668"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.10/zz-drop-aarch64-apple-darwin.tar.xz"
+      sha256 "9cf4dae26ddb542f7eefcaea52ba336feaab70febcb6a896f1a9a34d03ff9d2d"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-x86_64-apple-darwin.tar.xz"
-      sha256 "d663286b77aaf947f68c0f27d659ae122a9edf74533cab8e57195a0db66dd68b"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.10/zz-drop-x86_64-apple-darwin.tar.xz"
+      sha256 "200c9b852a3521adf57b5224adf9fd39ab9b099f2259d732e619ed900d49f8b2"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "ca2953fadce93c0107be3f0be138a0c127a2771cb38903af93f6f2ca961410ca"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.10/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "c77a918ffa596038f3e8dc04b44f9731d0c6004889a6ea8d430f4db454601a42"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.9/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "ac982766a3250af96bff458e206c9c7e9eb265fdc5abed87bd6174bc774f9e98"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.10/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "dac25457e399fe5effe05fdaaac8d1e0c4acfd284960d5f88157e802f347ac8c"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
@@ -89,8 +89,6 @@ class ZzDrop < Formula
     bin.install "zz-drop", "zz-tui" if OS.linux? && Hardware::CPU.intel?
 
     install_binary_aliases!
-
-    generate_completions_from_executable(bin/"zz-drop", "--completions", shells: [:bash, :zsh, :fish])
 
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
