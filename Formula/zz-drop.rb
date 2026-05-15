@@ -1,25 +1,25 @@
 class ZzDrop < Formula
   desc "CLI and local agent for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.0.1-pre.6"
+  version "0.0.1-pre.7"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-aarch64-apple-darwin.tar.xz"
-      sha256 "57346604ac983597fcec37fb390e5a234e81befd3064f40f6717db60c95bc1af"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.7/zz-drop-aarch64-apple-darwin.tar.xz"
+      sha256 "dc00ebb8240a927d7e15ff4a698708c19d31f17891e88d2c464c438dd2f128bc"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-x86_64-apple-darwin.tar.xz"
-      sha256 "c5cfb196388feb47a1e91c963e667bb746e0a9e3489c44c8eff4e77490091e1d"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.7/zz-drop-x86_64-apple-darwin.tar.xz"
+      sha256 "4ad7efc82aaa65be5e02809317baaaa46ac67c75dac0e6654fc5b361892ee77e"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "e08bd5f42877a17859408a7760262684f55f5e7c616fca24791d476929a7de37"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.7/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "70ffcc0e6baba42a4f6e5df4222da4dfb7427e88e33b7d4db345343da8d99436"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.6/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "7b37a7b7f4b48c5f293932bc4555c9f704ebe507f97f6a8129c9c72bf44f2b3d"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.0.1-pre.7/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "d058e70d48930646889e61fab1217e4f0dee08eccbca9f96c6c30b279be0998c"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
@@ -58,8 +58,6 @@ class ZzDrop < Formula
 
     install_binary_aliases!
 
-    generate_completions_from_executable(bin/"zz-drop", "--completions", shells: [:bash, :zsh, :fish])
-
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
     leftover_contents = Dir["*"] - doc_files
@@ -67,25 +65,5 @@ class ZzDrop < Formula
     # Install any leftover files in pkgshare; these are probably config or
     # sample files.
     pkgshare.install(*leftover_contents) unless leftover_contents.empty?
-  end
-
-  def post_install
-    zz = HOMEBREW_PREFIX/"bin/zz"
-    zz.make_symlink opt_bin/"zz-drop" if !zz.symlink? && !zz.exist?
-  end
-
-  def uninstall_postflight
-    zz = HOMEBREW_PREFIX/"bin/zz"
-    zz.unlink if zz.symlink? && zz.readlink == opt_bin/"zz-drop"
-  end
-
-  def caveats
-    <<~EOS
-      A `zz` shorthand was linked to `zz-drop` if no `zz` already
-      existed in your PATH. Shell completions for bash, zsh and
-      fish were installed automatically.
-      If you later install another command named `zz`, remove
-      #{HOMEBREW_PREFIX}/bin/zz and reinstall.
-    EOS
   end
 end
