@@ -1,25 +1,25 @@
 class ZzDrop < Formula
   desc "CLI and local agent for zz-drop"
   homepage "https://zz-drop.net"
-  version "0.9.5"
+  version "0.9.6"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.5/zz-drop-aarch64-apple-darwin.tar.xz"
-      sha256 "62307eb51cd03f5a7702fb57ff6588f26334d887fe61dda20e9e08ad70ffe61d"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.6/zz-drop-aarch64-apple-darwin.tar.xz"
+      sha256 "df3b5a924196970fe03f587128d4b74b736f9a2ddb788b08eb4ed5aad84c21b2"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.5/zz-drop-x86_64-apple-darwin.tar.xz"
-      sha256 "193d6b7fcd5e18ed08fbdebd92f9800bdbbb929c14660c98ddd9fb46175eaa52"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.6/zz-drop-x86_64-apple-darwin.tar.xz"
+      sha256 "b85ceb163805fb47fc619c4d6d1b83a187785c7e7f01bb6e8fd9d82ca5177ab0"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.5/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "46380575a94fff5d264f7b44004d4faa51989f045b9efbe2129cf58ab3c054f1"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.6/zz-drop-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "75b4fb754d6a6ff59d9eafa91ea5d39e4cded01174b01bab476554f8168edfae"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.5/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "c126474bd05629200e56e963c5b8e5dcb8889bc2b838f39dbca8462da8ad128e"
+      url "https://github.com/zz-drop/zz-drop/releases/download/v0.9.6/zz-drop-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "14812b922d378bc6041934c85dcae45b14d989ec24e3ee6f7975b5d11fd71ee8"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
@@ -90,10 +90,6 @@ class ZzDrop < Formula
 
     install_binary_aliases!
 
-    generate_completions_from_executable(bin/"zz-drop", "--completions", shells: [:bash, :zsh, :fish])
-    (bash_completion/"zz").make_symlink "zz-drop"
-    (fish_completion/"zz.fish").make_symlink "zz-drop.fish"
-
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
     leftover_contents = Dir["*"] - doc_files
@@ -101,28 +97,5 @@ class ZzDrop < Formula
     # Install any leftover files in pkgshare; these are probably config or
     # sample files.
     pkgshare.install(*leftover_contents) unless leftover_contents.empty?
-  end
-
-  def caveats
-    <<~EOS
-      Shell completions are installed in the cellar. To make them
-      load in your shell, two one-line setups (each runs once):
-
-        # 1) put brew's completion dirs on $fpath
-        echo 'eval "$(brew shellenv)"' >> ~/.zprofile
-
-        # 2) actually load completions in zsh
-        echo 'autoload -Uz compinit && compinit' >> ~/.zshrc
-
-      Open a new terminal, then test with `zz <TAB>`.
-
-      If you'd rather have zz-drop write a delimited block to your
-      rc file in one shot (with framework detection for oh-my-zsh,
-      prezto, zinit, etc.), run:
-
-        zz --setup-completions
-
-      To check the install at any point: `zz --check-completions`.
-    EOS
   end
 end
